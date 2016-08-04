@@ -3,6 +3,29 @@
 
 To start your new Phoenix application you have to:
 
+1. Install docker
+2. run
+
+```
+  make build
+```
+
+3. Run
+
+```
+  make run
+```
+
+4. Open in browser http://localhost:8080/
+
+TODO: For development, fix:
+* Makefile for: `DOCKER_PORT := 4000`
+* Dockerfile for: `ENV MIX_ENV dev` & `mix deps.get --only dev` & `EXPOSE 4000`
+* *4* <- Open in browser http://localhost:4000/
+* better fix for volume sharing working copy for livereload abbility.
+
+### Old method (not recomended at new reality):
+
 1. Clone this repo, then cd to the new directory
 2. Install dependencies with `mix deps.get`
 3. (optional) Install npm dependencies to customize the ES6 js/Sass `npm install`
