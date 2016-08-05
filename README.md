@@ -18,10 +18,13 @@ To start your new Phoenix application you have to:
 
 4. Open in browser http://localhost:8080/
 
-TODO: For development, fix:
-* Makefile for: `DOCKER_PORT := 4000`
-* Dockerfile for: `ENV MIX_ENV dev` & `mix deps.get --only dev` & `EXPOSE 4000`
-* *4* <- Open in browser http://localhost:4000/
+TODO: For development:
+
+```
+  DEST=dev make build
+  DEST=dev make run
+```
+
 * better fix for volume sharing working copy for livereload abbility.
 
 ### Old method (not recomended at new reality):

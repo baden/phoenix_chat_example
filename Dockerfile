@@ -4,7 +4,7 @@ MAINTAINER Denys Batrak baden.i.ua@gmail.com
 RUN mkdir /node && \
     cd /node && \
     curl -O https://nodejs.org/dist/v4.4.7/node-v4.4.7-linux-x64.tar.xz && \
-    tar xvf ./node-v4.4.7-linux-x64.tar.xz && \
+    tar xf ./node-v4.4.7-linux-x64.tar.xz && \
     rm ./node-v4.4.7-linux-x64.tar.xz
 
 ENV PATH /node/node-v4.4.7-linux-x64/bin/:${PATH}
@@ -15,27 +15,30 @@ ADD . /app
 
 WORKDIR /app
 
-ENV MIX_ENV prod
+ARG DEST=dev
+ENV MIX_ENV=${DEST}
 
 # TBD
 RUN mix local.hex --force && \
     mix local.rebar --force && \
-    mix deps.get --only prod
+    mix deps.get --only ${DEST}
 
 # mix deps.get && \
 
 RUN npm install
 
+
 # Not sure, maybe it can run early
-RUN mix compile
+RUN mix compile && \
+    mix phoenix.digest
 
 # RUN
 
-#dev
-# EXPOSE 4000
+# ENV PORT 8080
+ARG PORT=8080
+ENV PORT=${PORT}
 
-# prod
-EXPOSE 8080
+EXPOSE ${PORT}
 
 CMD ["mix", "phoenix.server"]
 # CMD ["bash"]
